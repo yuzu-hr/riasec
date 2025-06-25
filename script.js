@@ -56265,9 +56265,9 @@ setTimeout(function() {
     console.log('RIASEC enhanced initialized with', jobsDatabase.length, 'jobs and advanced filtering!');
 }, 200);
 
-// === EVENT LISTENERS FIXES ===
+// === EVENT LISTENERS FINAUX - VERSION QUI MARCHE ===
 setTimeout(function() {
-    console.log('🎯 Attaching events...');
+    console.log('🎯 Attaching final working events...');
     
     // Icônes catégories
     document.querySelectorAll('.category-icon').forEach(function(icon) {
@@ -56295,16 +56295,71 @@ setTimeout(function() {
         closeModal.addEventListener('click', closeResults);
     }
     
-    // === BOUTONS FILTRES - FORCE ONCLICK ===
+    // === FILTRES BASIQUES ===
+    document.querySelectorAll('input[data-filter="workContext"]').forEach(function(input) {
+        input.addEventListener('change', function() {
+            console.log('Work context changed:', this.value, this.checked);
+            setTimeout(updateFilters, 100);
+        });
+    });
+    
+    document.querySelectorAll('input[data-filter="education"]').forEach(function(input) {
+        input.addEventListener('change', function() {
+            console.log('Education changed:', this.value);
+            setTimeout(updateFilters, 100);
+        });
+    });
+    
+    document.querySelectorAll('input[data-filter="experience"]').forEach(function(input) {
+        input.addEventListener('change', function() {
+            console.log('Experience changed:', this.value);
+            setTimeout(updateFilters, 100);
+        });
+    });
+    
+    // === MOTIVATIONS AVEC MAX 3 ===
+    document.querySelectorAll('input[data-filter="workValues"]').forEach(function(input) {
+        input.addEventListener('change', function() {
+            console.log('Work value changed:', this.value, this.checked);
+            
+            var checkedValues = [];
+            document.querySelectorAll('input[data-filter="workValues"]:checked').forEach(function(inp) {
+                checkedValues.push(inp.value);
+            });
+            
+            // Logique max 3
+            if (checkedValues.length > 3) {
+                this.checked = false;
+                showNotification('💡 Maximum 3 motivations sélectionnées');
+                return;
+            }
+            
+            // Désactiver les autres si 3 sélectionnées
+            document.querySelectorAll('input[data-filter="workValues"]').forEach(function(inp) {
+                if (!inp.checked && checkedValues.length >= 3) {
+                    inp.disabled = true;
+                } else {
+                    inp.disabled = false;
+                }
+            });
+            
+            // Mettre à jour les filtres
+            currentFilters.workValues = checkedValues;
+            console.log('Work values updated:', currentFilters.workValues);
+            updateFilteredJobsCount();
+        });
+    });
+    
+    // === BOUTONS D'ACTION ===
     var applyBtn = document.getElementById('applyFiltersBtn');
     var resetBtn = document.getElementById('resetFiltersBtn');
     
     if (applyBtn) {
         applyBtn.onclick = function() {
             console.log('Apply filters clicked');
-            applyFilters();
+            updateFilters();
+            setTimeout(applyFilters, 200);
         };
-        console.log('✅ Apply button attached');
     }
     
     if (resetBtn) {
@@ -56312,8 +56367,7 @@ setTimeout(function() {
             console.log('Reset filters clicked');
             resetFilters();
         };
-        console.log('✅ Reset button attached');
     }
     
-    console.log('✅ All events attached!');
+    console.log('✅ Final working events attached!');
 }, 1500);
