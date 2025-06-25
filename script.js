@@ -56292,7 +56292,7 @@ setTimeout(function() {
     // Bouton fermer modal
     var closeModal = document.querySelector('.close-modal');
     if (closeModal) {
-        closeModal.addEventListener('click', resetEverything);
+        closeModal.addEventListener('click', closeResults);
     }
     
     // === BOUTONS FILTRES - FORCE ONCLICK ===
