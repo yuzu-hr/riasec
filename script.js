@@ -56265,11 +56265,11 @@ setTimeout(function() {
     console.log('RIASEC enhanced initialized with', jobsDatabase.length, 'jobs and advanced filtering!');
 }, 200);
 
-// === EVENT LISTENERS - VERSION CORRIGÉE ===
+// === EVENT LISTENERS COMPLETS - REMPLACER LA SECTION EXISTANTE ===
 setTimeout(function() {
-    console.log('🎯 Attaching events with delay...');
+    console.log('🎯 Attaching ALL events with delay...');
     
-    // Icônes catégories
+    // 1. Icônes catégories principales
     document.querySelectorAll('.category-icon').forEach(function(icon) {
         icon.addEventListener('click', function() {
             var category = this.getAttribute('data-category');
@@ -56278,13 +56278,13 @@ setTimeout(function() {
         });
     });
     
-    // Bouton principal
+    // 2. Bouton principal "Terminer l'évaluation"
     var completeBtn = document.getElementById('completeButton');
     if (completeBtn) {
         completeBtn.addEventListener('click', showResults);
     }
     
-    // Bouton fermer panel
+    // 3. Bouton fermer panel des compétences
     var closePanel = document.querySelector('.close-panel');
     if (closePanel) {
         closePanel.addEventListener('click', function() {
@@ -56293,7 +56293,7 @@ setTimeout(function() {
         });
     }
     
-    // Bouton fermer modal
+    // 4. Bouton fermer modal avec reset complet
     var closeModal = document.querySelector('.close-modal');
     if (closeModal) {
         closeModal.addEventListener('click', function() {
@@ -56302,5 +56302,54 @@ setTimeout(function() {
         });
     }
     
-    console.log('✅ All events attached with timeout!');
-}, 1500); // Délai plus long
+    // 5. FILTRES - Work Context (checkboxes)
+    document.querySelectorAll('input[data-filter="workContext"]').forEach(function(input) {
+        input.addEventListener('change', function() {
+            console.log('Work context filter changed:', this.value, this.checked);
+            updateFilters();
+        });
+    });
+    
+    // 6. FILTRES - Education (radio buttons)
+    document.querySelectorAll('input[data-filter="education"]').forEach(function(input) {
+        input.addEventListener('change', function() {
+            console.log('Education filter changed:', this.value);
+            updateFilters();
+        });
+    });
+    
+    // 7. FILTRES - Experience (radio buttons)
+    document.querySelectorAll('input[data-filter="experience"]').forEach(function(input) {
+        input.addEventListener('change', function() {
+            console.log('Experience filter changed:', this.value);
+            updateFilters();
+        });
+    });
+    
+    // 8. FILTRES - Work Values (checkboxes avec limite 3)
+    document.querySelectorAll('input[data-filter="workValues"]').forEach(function(input) {
+        input.addEventListener('change', function() {
+            console.log('Work values filter changed:', this.value, this.checked);
+            updateWorkValues(this);
+        });
+    });
+    
+    // 9. Boutons d'action des filtres
+    var applyBtn = document.getElementById('applyFiltersBtn');
+    if (applyBtn) {
+        applyBtn.addEventListener('click', function() {
+            console.log('Apply filters clicked');
+            applyFilters();
+        });
+    }
+    
+    var resetBtn = document.getElementById('resetFiltersBtn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', function() {
+            console.log('Reset filters clicked');
+            resetFilters();
+        });
+    }
+    
+    console.log('✅ ALL events attached with timeout - including filters!');
+}, 1500);
