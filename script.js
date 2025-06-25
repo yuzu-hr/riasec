@@ -56265,11 +56265,11 @@ setTimeout(function() {
     console.log('RIASEC enhanced initialized with', jobsDatabase.length, 'jobs and advanced filtering!');
 }, 200);
 
-// === EVENT LISTENERS - AJOUTÉ POUR ACTIVER LES CLICS ===
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🎯 DOM loaded, attaching events...');
+// === EVENT LISTENERS - VERSION CORRIGÉE ===
+setTimeout(function() {
+    console.log('🎯 Attaching events with delay...');
     
-    // Icônes catégories - CLICS PRINCIPAUX
+    // Icônes catégories
     document.querySelectorAll('.category-icon').forEach(function(icon) {
         icon.addEventListener('click', function() {
             var category = this.getAttribute('data-category');
@@ -56278,41 +56278,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Bouton principal "Terminer l'évaluation"
+    // Bouton principal
     var completeBtn = document.getElementById('completeButton');
     if (completeBtn) {
         completeBtn.addEventListener('click', showResults);
     }
     
-    // Bouton fermer panel des compétences
+    // Bouton fermer panel
     var closePanel = document.querySelector('.close-panel');
     if (closePanel) {
-        closePanel.addEventListener('click', closeSkillsPanel);
+        closePanel.addEventListener('click', function() {
+            console.log('Close panel clicked');
+            closeSkillsPanel();
+        });
     }
     
-    // Bouton fermer modal avec reset complet
+    // Bouton fermer modal
     var closeModal = document.querySelector('.close-modal');
     if (closeModal) {
-        closeModal.addEventListener('click', resetEverything);
+        closeModal.addEventListener('click', function() {
+            console.log('Close modal clicked');
+            resetEverything();
+        });
     }
     
-    console.log('✅ All events attached successfully!');
-});
-
-// Backup si DOMContentLoaded ne marche pas
-setTimeout(function() {
-    console.log('🔄 Fallback: attaching events...');
-    
-    document.querySelectorAll('.category-icon').forEach(function(icon) {
-        if (!icon.hasAttribute('data-event-attached')) {
-            icon.addEventListener('click', function() {
-                var category = this.getAttribute('data-category');
-                console.log('Fallback click:', category);
-                openSkillsPanel(category);
-            });
-            icon.setAttribute('data-event-attached', 'true');
-        }
-    });
-    
-    console.log('✅ Fallback events attached!');
-}, 2000);
+    console.log('✅ All events attached with timeout!');
+}, 1500); // Délai plus long
