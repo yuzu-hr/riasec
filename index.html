@@ -1,244 +1,257 @@
-<div class="background-pattern"></div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIASEC - Test d'Orientation Professionnelle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-pattern"></div>
 
-<div class="container">
-    <div class="header">
-        <h1 class="title">🌟 Vous avez gagné un niveau 🌟</h1>
-        <p class="subtitle">Distribuez 18 points en fonction des activités qui vous attirent le plus (de 0 à 3 points par compétence)</p>
-        
-        <div class="stats-bar">
-            <div class="stat-item">
-                <div class="stat-label">Points Disponibles</div>
-                <div class="stat-value" id="availablePoints">18</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label">Points Utilisés</div>
-                <div class="stat-value" id="usedPoints">0</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label">Domaines Développés</div>
-                <div class="stat-value" id="developedCategories">0</div>
-            </div>
-        </div>
-        
-        <button class="complete-button" id="completeButton" onclick="showResults()" disabled>
-            Terminer l'évaluation
-        </button>
-    </div>
-
-    <div class="skill-tree-container">
-        <div class="skill-tree">
-            <div class="central-connections"></div>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🌟 Vous avez gagné un niveau 🌟</h1>
+            <p class="subtitle">Distribuez 18 points en fonction des activités qui vous attirent le plus (de 0 à 3 points par compétence)</p>
             
-            <!-- Réaliste -->
-            <div class="category-branch branch-realistic">
-                <div class="category-icon" data-category="realistic" onclick="openSkillsPanel('realistic')">🔧</div>
-                <div class="category-name">Réaliste</div>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-label">Points Disponibles</div>
+                    <div class="stat-value" id="availablePoints">18</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Points Utilisés</div>
+                    <div class="stat-value" id="usedPoints">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Domaines Développés</div>
+                    <div class="stat-value" id="developedCategories">0</div>
+                </div>
             </div>
-
-            <!-- Investigatif -->
-            <div class="category-branch branch-investigative">
-                <div class="category-icon" data-category="investigative" onclick="openSkillsPanel('investigative')">🔬</div>
-                <div class="category-name">Investigatif</div>
-            </div>
-
-            <!-- Artistique -->
-            <div class="category-branch branch-artistic">
-                <div class="category-icon" data-category="artistic" onclick="openSkillsPanel('artistic')">🎨</div>
-                <div class="category-name">Artistique</div>
-            </div>
-
-            <!-- Social -->
-            <div class="category-branch branch-social">
-                <div class="category-icon" data-category="social" onclick="openSkillsPanel('social')">🤝</div>
-                <div class="category-name">Social</div>
-            </div>
-
-            <!-- Entreprenant -->
-            <div class="category-branch branch-enterprising">
-                <div class="category-icon" data-category="enterprising" onclick="openSkillsPanel('enterprising')">💼</div>
-                <div class="category-name">Entreprenant</div>
-            </div>
-
-            <!-- Conventionnel -->
-            <div class="category-branch branch-conventional">
-                <div class="category-icon" data-category="conventional" onclick="openSkillsPanel('conventional')">📋</div>
-                <div class="category-name">Conventionnel</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Panel des compétences -->
-<div class="skills-panel" id="skillsPanel">
-    <button class="close-panel" onclick="closeSkillsPanel()">×</button>
-    <div class="skills-panel-header">
-        <h3 class="skills-panel-title">
-            <span id="categoryIcon">🔧</span>
-            <span id="categoryTitle">Réaliste</span>
-        </h3>
-    </div>
-    <div id="skillsList"></div>
-</div>
-
-<!-- Modal des résultats avec filtres -->
-<div class="modal-overlay" id="resultsModal" onclick="closeModalIfClickedOutside(event)">
-    <div class="results-modal" onclick="event.stopPropagation()">
-        <button class="close-modal" onclick="closeResults()">×</button>
-        
-        <div class="results-header">
-            <h2 class="results-title">🎯 Vos Résultats RIASEC</h2>
-            <p class="results-subtitle">Votre profil de personnalité professionnelle</p>
+            
+            <button class="complete-button" id="completeButton" disabled>
+                Terminer l'évaluation
+            </button>
         </div>
 
-        <div class="riasec-code">
-            <div class="code-label">Votre Code RIASEC</div>
-            <div class="code-value" id="riasecCode">RIA</div>
-        </div>
-
-        <div class="profile-section">
-            <div class="profile-label">Votre Profil Gamifié</div>
-            <div id="profileInfo" class="profile-content">
-                <div class="profile-icon">🌟</div>
-                <div class="profile-name">Le Polyvalent</div>
-                <div class="profile-description">Vous avez un profil unique et équilibré</div>
-            </div>
-        </div>
-
-        <div class="chart-container">
-            <h3 class="chart-title">📊 Répartition de vos Points</h3>
-            <div class="bar-chart" id="barChart"></div>
-        </div>
-
-        <!-- Section des filtres avancés -->
-        <div class="filters-section">
-            <h3 class="filters-title">🔍 Affinez vos Résultats</h3>
-            <div class="filters-grid">
+        <div class="skill-tree-container">
+            <div class="skill-tree">
+                <div class="central-connections"></div>
                 
-                <!-- Filtre Lieu de travail -->
-                <div class="filter-group">
-                    <h4 class="filter-label">📍 Lieu de travail</h4>
-                    <div class="filter-options">
-                        <label class="filter-option">
-                            <input type="checkbox" value="indoorsControlled" onchange="updateFilters()">
-                            <span>🏢 Bureau climatisé</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" value="indoorsNotControlled" onchange="updateFilters()">
-                            <span>🔧 Atelier technique</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" value="outdoorsCovered" onchange="updateFilters()">
-                            <span>🏗️ Extérieur abrité</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" value="outdoorsExposed" onchange="updateFilters()">
-                            <span>🌤️ Extérieur tous temps</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" value="vehicle" onchange="updateFilters()">
-                            <span>🚗 Véhicule/Mobile</span>
-                        </label>
-                    </div>
+                <!-- Réaliste -->
+                <div class="category-branch branch-realistic">
+                    <div class="category-icon" data-category="realistic">🔧</div>
+                    <div class="category-name">Réaliste</div>
                 </div>
 
-                <!-- Filtre Niveau d'études -->
-                <div class="filter-group">
-                    <h4 class="filter-label">🎓 Niveau d'études</h4>
-                    <div class="filter-options">
-                        <label class="filter-option">
-                            <input type="radio" name="education" value="2" onchange="updateFilters()">
-                            <span>📚 Bac ou moins</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="radio" name="education" value="5" onchange="updateFilters()">
-                            <span>📖 Post-bac courte</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="radio" name="education" value="6" onchange="updateFilters()">
-                            <span>🎯 Licence/Bachelor</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="radio" name="education" value="8" onchange="updateFilters()">
-                            <span>🎖️ Master</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="radio" name="education" value="12" onchange="updateFilters()">
-                            <span>👨‍🎓 Doctorat+</span>
-                        </label>
-                    </div>
+                <!-- Investigatif -->
+                <div class="category-branch branch-investigative">
+                    <div class="category-icon" data-category="investigative">🔬</div>
+                    <div class="category-name">Investigatif</div>
                 </div>
 
-                <!-- Filtre Expérience -->
-                <div class="filter-group">
-                    <h4 class="filter-label">💼 Expérience</h4>
-                    <div class="filter-options">
-                        <label class="filter-option">
-                            <input type="radio" name="experience" value="debutant" onchange="updateFilters()">
-                            <span>🌱 Débutant (0-1 an)</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="radio" name="experience" value="junior" onchange="updateFilters()">
-                            <span>🚀 Junior (1-3 ans)</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="radio" name="experience" value="confirme" onchange="updateFilters()">
-                            <span>💪 Confirmé (3-6 ans)</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="radio" name="experience" value="senior" onchange="updateFilters()">
-                            <span>👑 Senior (6+ ans)</span>
-                        </label>
-                    </div>
+                <!-- Artistique -->
+                <div class="category-branch branch-artistic">
+                    <div class="category-icon" data-category="artistic">🎨</div>
+                    <div class="category-name">Artistique</div>
                 </div>
 
-                <!-- Filtre Motivations -->
-                <div class="filter-group">
-                    <h4 class="filter-label">💝 Motivations (max 3)</h4>
-                    <div class="filter-options">
-                        <label class="filter-option">
-                            <input type="checkbox" value="achievement" onchange="updateWorkValues(this)">
-                            <span>🏆 Accomplissement</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" value="independence" onchange="updateWorkValues(this)">
-                            <span>🦅 Autonomie</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" value="recognition" onchange="updateWorkValues(this)">
-                            <span>⭐ Reconnaissance</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" value="relationships" onchange="updateWorkValues(this)">
-                            <span>🤝 Relations humaines</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" value="support" onchange="updateWorkValues(this)">
-                            <span>🛡️ Sécurité d'emploi</span>
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" value="workingConditions" onchange="updateWorkValues(this)">
-                            <span>💰 Conditions de travail</span>
-                        </label>
-                    </div>
+                <!-- Social -->
+                <div class="category-branch branch-social">
+                    <div class="category-icon" data-category="social">🤝</div>
+                    <div class="category-name">Social</div>
                 </div>
-            </div>
 
-            <div class="filters-actions">
-                <button class="filter-button apply-btn" onclick="applyFilters()">
-                    ✨ Appliquer les Filtres
-                </button>
-                <button class="filter-button reset-btn" onclick="resetFilters()">
-                    🔄 Réinitialiser
-                </button>
-                <div class="filter-info">
-                    <span id="filteredJobsCount">0</span> métiers correspondent à vos critères
+                <!-- Entreprenant -->
+                <div class="category-branch branch-enterprising">
+                    <div class="category-icon" data-category="enterprising">💼</div>
+                    <div class="category-name">Entreprenant</div>
+                </div>
+
+                <!-- Conventionnel -->
+                <div class="category-branch branch-conventional">
+                    <div class="category-icon" data-category="conventional">📋</div>
+                    <div class="category-name">Conventionnel</div>
                 </div>
             </div>
         </div>
-
-        <div id="jobRecommendations"></div>
     </div>
-</div>
 
-<!-- Notification -->
-<div id="notification" class="notification"></div>
+    <!-- Panel des compétences -->
+    <div class="skills-panel" id="skillsPanel">
+        <button class="close-panel">×</button>
+        <div class="skills-panel-header">
+            <h3 class="skills-panel-title">
+                <span id="categoryIcon">🔧</span>
+                <span id="categoryTitle">Réaliste</span>
+            </h3>
+        </div>
+        <div id="skillsList"></div>
+    </div>
+
+    <!-- Modal des résultats avec filtres -->
+    <div class="modal-overlay" id="resultsModal">
+        <div class="results-modal">
+            <button class="close-modal">×</button>
+            
+            <div class="results-header">
+                <h2 class="results-title">🎯 Vos Résultats RIASEC</h2>
+                <p class="results-subtitle">Votre profil de personnalité professionnelle</p>
+            </div>
+
+            <div class="riasec-code">
+                <div class="code-label">Votre Code RIASEC</div>
+                <div class="code-value" id="riasecCode">RIA</div>
+            </div>
+
+            <div class="profile-section">
+                <div class="profile-label">Votre Profil Gamifié</div>
+                <div id="profileInfo" class="profile-content">
+                    <div class="profile-icon">🌟</div>
+                    <div class="profile-name">Le Polyvalent</div>
+                    <div class="profile-description">Vous avez un profil unique et équilibré</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3 class="chart-title">📊 Répartition de vos Points</h3>
+                <div class="bar-chart" id="barChart"></div>
+            </div>
+
+            <!-- Section des filtres avancés -->
+            <div class="filters-section">
+                <h3 class="filters-title">🔍 Affinez vos Résultats</h3>
+                <div class="filters-grid">
+                    
+                    <!-- Filtre Lieu de travail -->
+                    <div class="filter-group">
+                        <h4 class="filter-label">📍 Lieu de travail</h4>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" value="indoorsControlled" data-filter="workContext">
+                                <span>🏢 Bureau climatisé</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="indoorsNotControlled" data-filter="workContext">
+                                <span>🔧 Atelier technique</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="outdoorsCovered" data-filter="workContext">
+                                <span>🏗️ Extérieur abrité</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="outdoorsExposed" data-filter="workContext">
+                                <span>🌤️ Extérieur tous temps</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="vehicle" data-filter="workContext">
+                                <span>🚗 Véhicule/Mobile</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Filtre Niveau d'études -->
+                    <div class="filter-group">
+                        <h4 class="filter-label">🎓 Niveau d'études</h4>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="radio" name="education" value="2" data-filter="education">
+                                <span>📚 Bac ou moins</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="education" value="5" data-filter="education">
+                                <span>📖 Post-bac courte</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="education" value="6" data-filter="education">
+                                <span>🎯 Licence/Bachelor</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="education" value="8" data-filter="education">
+                                <span>🎖️ Master</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="education" value="12" data-filter="education">
+                                <span>👨‍🎓 Doctorat+</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Filtre Expérience -->
+                    <div class="filter-group">
+                        <h4 class="filter-label">💼 Expérience</h4>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="radio" name="experience" value="debutant" data-filter="experience">
+                                <span>🌱 Débutant (0-1 an)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="experience" value="junior" data-filter="experience">
+                                <span>🚀 Junior (1-3 ans)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="experience" value="confirme" data-filter="experience">
+                                <span>💪 Confirmé (3-6 ans)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="radio" name="experience" value="senior" data-filter="experience">
+                                <span>👑 Senior (6+ ans)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Filtre Motivations -->
+                    <div class="filter-group">
+                        <h4 class="filter-label">💝 Motivations (max 3)</h4>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" value="achievement" data-filter="workValues">
+                                <span>🏆 Accomplissement</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="independence" data-filter="workValues">
+                                <span>🦅 Autonomie</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="recognition" data-filter="workValues">
+                                <span>⭐ Reconnaissance</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="relationships" data-filter="workValues">
+                                <span>🤝 Relations humaines</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="support" data-filter="workValues">
+                                <span>🛡️ Sécurité d'emploi</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="workingConditions" data-filter="workValues">
+                                <span>💰 Conditions de travail</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filters-actions">
+                    <button class="filter-button apply-btn" id="applyFiltersBtn">
+                        ✨ Appliquer les Filtres
+                    </button>
+                    <button class="filter-button reset-btn" id="resetFiltersBtn">
+                        🔄 Réinitialiser
+                    </button>
+                    <div class="filter-info">
+                        <span id="filteredJobsCount">0</span> métiers correspondent à vos critères
+                    </div>
+                </div>
+            </div>
+
+            <div id="jobRecommendations"></div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
