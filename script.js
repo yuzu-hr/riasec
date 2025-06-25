@@ -56264,3 +56264,55 @@ setTimeout(function() {
     updateDisplay();
     console.log('RIASEC enhanced initialized with', jobsDatabase.length, 'jobs and advanced filtering!');
 }, 200);
+
+// === EVENT LISTENERS - AJOUTÉ POUR ACTIVER LES CLICS ===
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🎯 DOM loaded, attaching events...');
+    
+    // Icônes catégories - CLICS PRINCIPAUX
+    document.querySelectorAll('.category-icon').forEach(function(icon) {
+        icon.addEventListener('click', function() {
+            var category = this.getAttribute('data-category');
+            console.log('Category clicked:', category);
+            openSkillsPanel(category);
+        });
+    });
+    
+    // Bouton principal "Terminer l'évaluation"
+    var completeBtn = document.getElementById('completeButton');
+    if (completeBtn) {
+        completeBtn.addEventListener('click', showResults);
+    }
+    
+    // Bouton fermer panel des compétences
+    var closePanel = document.querySelector('.close-panel');
+    if (closePanel) {
+        closePanel.addEventListener('click', closeSkillsPanel);
+    }
+    
+    // Bouton fermer modal avec reset complet
+    var closeModal = document.querySelector('.close-modal');
+    if (closeModal) {
+        closeModal.addEventListener('click', resetEverything);
+    }
+    
+    console.log('✅ All events attached successfully!');
+});
+
+// Backup si DOMContentLoaded ne marche pas
+setTimeout(function() {
+    console.log('🔄 Fallback: attaching events...');
+    
+    document.querySelectorAll('.category-icon').forEach(function(icon) {
+        if (!icon.hasAttribute('data-event-attached')) {
+            icon.addEventListener('click', function() {
+                var category = this.getAttribute('data-category');
+                console.log('Fallback click:', category);
+                openSkillsPanel(category);
+            });
+            icon.setAttribute('data-event-attached', 'true');
+        }
+    });
+    
+    console.log('✅ Fallback events attached!');
+}, 2000);
