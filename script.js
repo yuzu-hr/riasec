@@ -70,7 +70,7 @@ var categories = {
         skills: [
             'Négocier avec des clients',
             'Commercialiser des produits et services',
-            'Convaincre des personnes d'acheter un produit'
+            'Convaincre des personnes d\'acheter un produit'
         ],
         indices: [12, 13, 14]
     },
@@ -81,7 +81,7 @@ var categories = {
         color: '#bae1ff',
         skills: [
             'Archiver des documents et des fichiers importants',
-            'Réaliser la comptabilité d'une entreprise',
+            'Réaliser la comptabilité d\'une entreprise',
             'Insérer des informations dans une base de données'
         ],
         indices: [15, 16, 17]
