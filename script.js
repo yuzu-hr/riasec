@@ -22,7 +22,7 @@ var categories = {
         skills: [
             'Faire fonctionner des machines pour produire des pièces mécaniques',
             'Faire de la maintenance sur des machines et des outils',
-            'Concevoir le système électrique d'une maison'
+            'Concevoir le système électrique d\'une maison'
         ],
         indices: [0, 1, 2]
     },
