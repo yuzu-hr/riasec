@@ -22,7 +22,7 @@ var categories = {
         skills: [
             'Faire fonctionner des machines pour produire des pièces mécaniques',
             'Faire de la maintenance sur des machines et des outils',
-            'Calculer l\'aire de figures géométriques'
+            'Concevoir le système électrique d'une maison'
         ],
         indices: [0, 1, 2]
     },
@@ -56,9 +56,9 @@ var categories = {
         letter: 'S',
         color: '#ffd93d',
         skills: [
-            'Offrir des services sociaux dans les quartiers ou les communautés',
-            'Donner des conseils sur la santé et le bien-être',
-            'Être disponible pour aider les gens'
+            'Proposer des services sociaux dans des quartiers ou communautés',
+            'Accompagner des personnes sur les questions de santé et de bien-être',
+            'Être disponible pour aider les autres'
         ],
         indices: [9, 10, 11]
     },
@@ -68,9 +68,9 @@ var categories = {
         letter: 'E',
         color: '#ffb3ba',
         skills: [
-            'Participer à la planification stratégique d\'entreprises',
-            'Gérer les objectifs et les performances d\'équipes de travail',
-            'Négocier avec des clients'
+            'Négocier avec des clients',
+            'Commercialiser des produits et services',
+            'Convaincre des personnes d'acheter un produit'
         ],
         indices: [12, 13, 14]
     },
@@ -80,9 +80,9 @@ var categories = {
         letter: 'C',
         color: '#bae1ff',
         skills: [
-            'Superviser le respect des lois',
-            'Analyser des situations économiques nationales et internationales',
-            'Archiver des documents et fichiers importants'
+            'Archiver des documents et des fichiers importants',
+            'Réaliser la comptabilité d'une entreprise',
+            'Insérer des informations dans une base de données'
         ],
         indices: [15, 16, 17]
     }
